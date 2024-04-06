@@ -4,6 +4,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 
 public enum ActionState {IDLE, RUNNING, JUMPING, FALLING, ATTACK, DASH, NONE};
+
 public class Player: EntityController
 {
     
@@ -77,8 +78,18 @@ public class Player: EntityController
     }
 
     IEnumerator DeathSequence() {
+
+        Rigidbody2D rb = GetComponent<Rigidbody2D>();
+        SpriteRenderer spriteRenderer = GetComponent<SpriteRenderer>();
+
+        if (rb != null && spriteRenderer != null)
+        {
+            rb.velocity = Vector2.zero;
+            rb.constraints = RigidbodyConstraints2D.FreezeAll;
+        }
+
         anim.Play("death");
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(5f);
         GameManager.RestartGame();
     }
 }
