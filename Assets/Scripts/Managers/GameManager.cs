@@ -38,4 +38,23 @@ public class GameManager
     public static void WinGame(){
         Instance.Canvas.WinScreen();
     }
+
+    public void StartGame()
+    {
+        SceneManager.LoadScene("testing");
+    }
+
+    public void EndGame()
+    {
+        Application.Quit();
+    }
+
+
+    public void Update()
+    {
+        if (Input.GetKeyUp(KeyCode.Escape))
+        {
+            EndGame();
+        }
+    }
 }
